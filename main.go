@@ -50,6 +50,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	log.Infof(nil, "generating dataset")
+
 	newIndex, filename, err := generateDataset(config)
 	if err != nil {
 		log.Fatal(err)
@@ -68,6 +70,7 @@ func main() {
 	web.Use(cors)
 	web.Get("/", web.ServeFunc(handler.Search))
 
+	log.Infof(nil, "listening and serving")
 	err = http.ListenAndServe(config.Listen, web)
 	if err != nil {
 		log.Fatal(err)

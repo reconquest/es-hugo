@@ -77,6 +77,7 @@ func (elastic *Elastic) DeleteIndex(name string) error {
 }
 
 func (elastic *Elastic) Prepare() error {
+	log.Infof(nil, "uploading dataset")
 	err := elastic.Bulk()
 	if err != nil {
 		return karma.Format(
@@ -85,6 +86,7 @@ func (elastic *Elastic) Prepare() error {
 		)
 	}
 
+	log.Infof(nil, "creating alias")
 	err = elastic.Alias()
 	if err != nil {
 		return karma.Format(
@@ -93,6 +95,7 @@ func (elastic *Elastic) Prepare() error {
 		)
 	}
 
+	log.Infof(nil, "getting all aliases")
 	aliases, err := elastic.GetAliases()
 	if err != nil {
 		return err
@@ -103,7 +106,7 @@ func (elastic *Elastic) Prepare() error {
 			continue
 		}
 
-		log.Infof(nil, "removing index and alias: %s", alias)
+		log.Infof(nil, "removing alias: %s", alias)
 
 		err := elastic.DeleteAlias(alias)
 		if err != nil {
@@ -113,6 +116,7 @@ func (elastic *Elastic) Prepare() error {
 			)
 		}
 
+		log.Infof(nil, "index alias: %s", alias)
 		err = elastic.DeleteIndex(alias)
 		if err != nil {
 			return karma.Format(
