@@ -1,14 +1,12 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"os"
 
-	"gopkg.in/resty.v1"
 	"github.com/reconquest/karma-go"
 	"github.com/reconquest/pkg/log"
 	"github.com/zazab/zhash"
+	"gopkg.in/resty.v1"
 )
 
 type Elastic struct {
@@ -136,10 +134,7 @@ func (elastic *Elastic) Search(query string) ([]map[string]interface{}, error) {
 			},
 		},
 	}
-	{
-		marshaledXXX, _ := json.MarshalIndent(body, "", "  ")
-		fmt.Printf("body: %s\n", string(marshaledXXX))
-	}
+
 	result := map[string]interface{}{}
 	_, err := elastic.rest.R().
 		SetBody(body).
