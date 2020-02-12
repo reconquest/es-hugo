@@ -18,6 +18,7 @@ var (
 	version = "[manual build]"
 	usage   = "es-hugo " + version + `
 
+Requires kovetskiy/hugo-elasticsearch
 
 Usage:
   es-hugo [options]
