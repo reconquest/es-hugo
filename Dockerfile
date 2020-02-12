@@ -12,7 +12,10 @@ RUN CGO_ENABLED=0 GOOS=linux GO111MODULE=on go build \
 
 FROM alpine
 
-WORKDIR /app
+WORKDIR /
 COPY --from=0 /app .
 
-ENTRYPOINT ["/app"]
+RUN apk add --update --no-cache npm nodejs
+RUN npm install -g hugo-elasticsearch
+
+CMD ["/app"]
