@@ -43,7 +43,6 @@ func main() {
 	}
 
 	log.Infof(karma.Describe("version", version), "started es-hugo")
-
 	log.SetLevel(log.LevelDebug)
 
 	config, err := getConfig(args["--config"].(string))

@@ -16,6 +16,6 @@ WORKDIR /
 COPY --from=0 /app .
 
 RUN apk add --update --no-cache npm nodejs
-RUN npm install -g hugo-elasticsearch
+RUN npm install -g kovetskiy/hugo-elasticsearch
 
 CMD ["/app"]
